@@ -1,0 +1,94 @@
+#%RAML 1.0
+types:
+  Address:
+    description: Address data type
+    example:
+      strict: true
+      value:
+        street: 44 Shirley Ave.
+        city: West Chicago
+        postalCode: "60185"
+        state: IL
+        country: USA
+    properties:
+      street?:
+        example: Example
+        type: string
+      city?:
+        example: Example
+        type: string
+      postalCode?:
+        example: Example
+        type: string
+      state?:
+        example: Example
+        type: string
+      country?:
+        example: Example
+        type: string
+  contact:
+    description: Contact data type
+    example:
+      strict: true
+      value:
+        firstName: Danny
+        lastName: Brookshire
+        phone: 123-412-3412
+        email: danny.brookshire@example.com
+        deliveryAddress:
+          street: 44 Shirley Ave.
+          city: West Chicago
+          postalCode: "60185"
+          state: IL
+          country: USA
+        postalAddress:
+          street: 44 Shirley Ave.
+          city: West Chicago
+          postalCode: "60185"
+          state: IL
+          country: USA
+    properties:
+      firstName?:
+        example: Example
+        type: string
+      lastName:
+        example: Example
+        type: string
+      Phone?:
+        example: Example
+        type: string
+      email?:
+        example: Example
+        type: string
+      deliveryAddress?:
+        type: Address
+      postalAddress:
+        type: Address
+title: NTO Customer Database API
+baseUri: api.samplebaseuri.com
+description: A simple API to retrieve information from Northern Trail Outfitters’ customer database
+mediaType:
+  - application/json
+version: 1.0.0
+protocols:
+  - HTTP
+  - HTTPS
+/customers:
+  get:
+    displayName: Get list of customers
+    responses:
+      "200":
+        body:
+          items:
+            type: contact
+/customers/{customerId}:
+  get:
+    displayName: Get customer by ID
+    responses:
+      "200":
+        body:
+          type: contact
+  uriParameters:
+    customerId:
+      example: Example
+      type: string
